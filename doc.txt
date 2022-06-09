@@ -1,0 +1,5 @@
+
+algorithm
+https://www.investopedia.com/terms/z/zig_zag_indicator.asp
+
+https://stackoverflow.com/questions/65800877/python-zig-zag-algorithm-function-not-returning-expected-results
