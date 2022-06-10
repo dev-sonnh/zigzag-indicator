@@ -18,7 +18,7 @@ difference_price = "Absolute"
 
 
 bar_index = len(df)
-df['DateTime'] = pd.to_datetime(df['Time'])
+df['DateTime'] = pd.to_datetime(df['Date'])
 df['TimeStamp'] = df.DateTime.astype('int64') // 10 ** 9
 time = np.array(df['TimeStamp'])
 
@@ -27,9 +27,10 @@ time = np.array(df['TimeStamp'])
 def pivots (src, length, isHigh):
     isFound = False
     p = np.array(src)[length]
-
+    src = list(reversed(src))
+    bar_index = list(range(len(src)))
     if length == 0:
-        [time, p]
+        yield 0, p
     else:
         isFound = True
         for i in range (abs(length - 1)) :
@@ -42,10 +43,10 @@ def pivots (src, length, isHigh):
                 isFound = False
             if not isHigh and src[i] <= p:
                 isFound = False
-        if isFound and length * 2 <= bar_index:
-            return [time[length], p]
+        if isFound and length * 2 <= len(src):
+            yield [bar_index[length], p]
         else:
-            return [int(np.nan), float(np.nan)]
+            yield [int(np.nan), float(np.nan)]
 
 high = np.array(df['High'])
 low = np.array(df['Low'])

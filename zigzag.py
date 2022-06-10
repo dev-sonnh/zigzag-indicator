@@ -38,19 +38,25 @@ def zigzag(highs, lows, depth=10, dev_threshold=5):
     data_highs = [x for x in pivots(highs, floor(depth / 2), True) if x[0]]
     data_lows = [x for x in pivots(lows, floor(depth / 2), False) if x[0]]
 
+    for x in pivots(highs, floor(depth / 2), True):
+        print(x)
+    print('low', data_lows)
+    print('high', data_highs)
+
     raw_pairs = []
 
     for i, (ind, p) in enumerate(data_highs):
         lows_d = sorted([(ind_l, p_l) for ind_l, p_l in data_lows if ind > ind_l], key=lambda x: x[0])
+
         if lows_d:
             lows = lows_d[-1]
-
+            print(_calc_dev(lows[1], p), 'price low:', lows[1], 'price high:', p)
             if abs(_calc_dev(lows[1], p)) >= dev_threshold:
                 raw_pairs.append(
                     ((ind, p),
                      (lows[0], lows[1]))
                 )
-
+    print(raw_pairs)
     result = []
 
     for (i_h, p_h),(i_l, p_l) in raw_pairs:

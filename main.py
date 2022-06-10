@@ -10,7 +10,7 @@ import binance
 # high = np.array(df['High'])
 # low = np.array(df['Low'])
 
-data = binance.get_data(market='NEARUSDT', tick_interval='1h')
+data = binance.get_data(market='NEARUSDT', tick_interval='1m')
 (date, open, high, low, close) = data
 
 if __name__ == '__main__':
